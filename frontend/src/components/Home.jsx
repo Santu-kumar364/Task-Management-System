@@ -1,100 +1,75 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import "../index.css"; // Importing the styles
+import { RxCross2 } from "react-icons/rx";
 
-const api = "http://localhost:8080/api/todos"
+const api = "http://localhost:8080/api/todos";
 
 export const Home = () => {
-  const [title, setTitle]=useState();
-  const [todos, SetTodos]=useState([]);
+  const [title, setTitle] = useState();
+  const [todos, SetTodos] = useState([]);
 
-  useEffect(()=>{
-    fetchAllTodos()
-  }, [])
+  useEffect(() => {
+    fetchAllTodos();
+  }, []);
 
+  const createTodo = async () => {
+    const todo = { title };
 
-  const createTodo = async ()=>{
-    const todo = {title}
-    
     try {
-      const {data}=await axios.post(`${api}`,todo) 
-      SetTodos([...todos, data])
-      console.log(todo)
+      const { data } = await axios.post(`${api}`, todo);
+      SetTodos([...todos, data]);
+      console.log(todo);
     } catch (error) {
-      console.log("catch error: ", error)
-      
-    }
-  }
-
-  const fetchAllTodos= async ()=>{
-    
-    try {
-      const {data}=await axios.get(`${api}`) 
-      SetTodos(data)
-      console.log("all todos ",data)
-    } catch (error) {
-      console.log("catch error: ", error)  
+      console.log("catch error: ", error);
     }
   };
 
-  const deleteTodo= async (id)=>{
-    
+  const fetchAllTodos = async () => {
     try {
-      const {data}=await axios.delete(`${api}/${id}`) 
-      SetTodos(todos.filter(todo=>todo.id!==id));
-      console.log("all todos ",data)
+      const { data } = await axios.get(`${api}`);
+      SetTodos(data);
+      console.log("all todos ", data);
     } catch (error) {
-      console.log("catch error: ", error)  
+      console.log("catch error: ", error);
+    }
+  };
+
+  const deleteTodo = async (id) => {
+    try {
+      await axios.delete(`${api}/${id}`);
+      SetTodos(todos.filter((todo) => todo.id !== id));
+    } catch (error) {
+      console.log("catch error: ", error);
     }
   };
 
   return (
-    <div className="w-[50vw] h-[80vh] bg-white rounded-xl ">
-      <div className="bg-[#758AA2] p-5 flex gap-5 justify-center rounded-t-xl">
+    <div className="container">
+      <div className="header">
         <input
-          className="p-2 rounded-md w-full outline-none px-5 text-black"
+          className="input"
           placeholder="Add New Task"
           type="text"
-          onChange={(e)=>setTitle(e.target.value)}
-
+          onChange={(e) => setTitle(e.target.value)}
         />
-        <button onClick={createTodo} className="py-2 px-5 rounded-md bg-[#2B2B52]">Add</button>
+        <button onClick={createTodo} className="add-button">
+          Add
+        </button>
       </div>
-      <h1 className="text-black text-center pt-10 font-bold">List Of Todo</h1>
-      <div className="p-5 space-y-2 overflow-y-auto h-[60vh]">
+      <h1 className="title">List Of Todo</h1>
+      <div className="todo-list">
         {todos.map((item, index) => (
-          <div className="bg-[#99AAAB] p-3 rounded-md flex items-center justify-between">
-            <div class="">
-              <p class="text-gray-900 text-sm">
-                {index + 1}. {item.title}
-              </p>
-            </div>
-            <div class="flex space-x-4">
-              <button
-              onClick={()=>deleteTodo(item.id)}
-                class="text-red-600 hover:text-white focus:outline-none rounded-full hover:bg-red-600 p-2"
-                aria-label="Delete"
-              >
-                <svg
-                  class="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  ></path>
-                </svg>
-              </button>
-            </div>
+          <div className="todo-item" key={item.id}>
+            <p className="todo-text">
+              {index + 1}. {item.title}
+            </p>
+            <button onClick={() => deleteTodo(item.id)} className="delete-button">
+            <RxCross2 size={20} color="red" />
+            </button>
           </div>
         ))}
       </div>
     </div>
   );
 };
-
-
-
