@@ -2,9 +2,9 @@ import React from "react";
 
 const SearchItems = ({ searchItem, setSearchItem }) => {
   return (
-    <div className="header">
+    <div className="search">
       <input
-        className="input"
+        className="search-input"
         placeholder="Search Todos"
         type="text"
         value={searchItem}
