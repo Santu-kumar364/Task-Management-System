@@ -19,7 +19,7 @@ export const Home = () => {
     if (!title.trim()) return; // To prevent adding empty tasks
 
     const todo = { title };
-
+    
     try {
       const { data } = await axios.post(`${api}`, todo);
       setTodos([...todos, data]);
