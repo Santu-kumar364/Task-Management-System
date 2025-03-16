@@ -1,6 +1,6 @@
 import React from "react";
 
-const AddItem = ({ title, setTitle, createTodo }) => {
+const AddItem = ({ title, setTitle, createTodo, error}) => {
   return (
     <div className="header">
       <input
@@ -14,6 +14,8 @@ const AddItem = ({ title, setTitle, createTodo }) => {
       <button onClick={createTodo} className="add-button">
         Add
       </button>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
     </div>
   );
 };

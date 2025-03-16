@@ -9,10 +9,11 @@ const LineItem = ({ item, index, deleteTodo }) => {
         </p>
         <button 
         onClick={() => deleteTodo(item.id)} className="delete-button">
-            <RxCross2 size={20} color="red" />
+            <RxCross2 size={20}  />
         </button>
     </div>
   );
 };
 
 export default LineItem;
+

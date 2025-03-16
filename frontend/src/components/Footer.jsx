@@ -1,11 +1,19 @@
 import React from "react";
 
-const Footer = ({todos, filteredTodos}) => {
+const Footer = ({ todos, filteredTodos, searchItem }) => {
   return (
-      <div className="footer">
-        Total Todos: {todos.length} | Showing: {filteredTodos.length}
-      </div>
+    <footer className="footer">
+      {filteredTodos.length === 0 ? null : (
+        <p>
+          {searchItem.trim()
+            ? `Showing: ${filteredTodos.length} out of ${todos.length} todos`
+            : `Total Todos: ${todos.length}`}
+        </p>
+      )}
+    </footer>
   );
 };
 
 export default Footer;
+
+
