@@ -1,5 +1,5 @@
 # **Task-Management-System**  
-I built a **Task-Management-System** to help users efficiently manage their daily tasks. The application provides a simple and intuitive interface to **add, edit, and delete tasks**, ensuring better productivity and organization.  
+This application is built using **React** for the frontend and **Spring Boot** for the backend, allowing users to **create, fetch, and delete tasks seamlessly.** The goal is to provide a simple and efficient task management solution with a smooth user experience.  
  
 ## **Features**  
  **Task Management** – Create, update, and delete tasks.  
