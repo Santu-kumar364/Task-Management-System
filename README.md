@@ -1,5 +1,3 @@
----
-
 # **Task-Management-System**  
 I built a **Task-Management-System** to help users efficiently manage their daily tasks. The application provides a simple and intuitive interface to **add, edit, and delete tasks**, ensuring better productivity and organization.  
  
